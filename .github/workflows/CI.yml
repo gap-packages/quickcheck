@@ -36,6 +36,6 @@ jobs:
           GAP_PKGS_TO_BUILD: "io orb datastructures digraphs profiling"
       - uses: gap-actions/run-pkg-tests@v3
       - uses: gap-actions/process-coverage@v2
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
