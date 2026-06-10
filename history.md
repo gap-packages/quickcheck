@@ -1,3 +1,9 @@
+v1.0.2
+======
+
+* Add `IsPartialPerm` as a supported argument type
+* Add tests for partial permutations and transformations
+
 v1.0.1
 ======
 
