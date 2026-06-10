@@ -46,7 +46,7 @@ gap> justA := function(a,b)
 gap> QC_CheckEqual([IsInt, IsInt], checkDiv, justA);
 true
 
-# doc/_Chapter_Tutorial.xml:180-194
+# doc/_Chapter_Tutorial.xml:183-197
 gap> func := function(x)
 >     local a, s;
 >     if x < 2 then
@@ -61,7 +61,7 @@ gap> func := function(x)
 gap> QC_Check([IsInt], func);
 true
 
-# doc/_Chapter_Tutorial.xml:211-218
+# doc/_Chapter_Tutorial.xml:214-221
 gap> makePosInt := function(rs, limit)
 >    return Random(rs, [1..limit]);
 > end;;
@@ -69,7 +69,7 @@ gap> makePerm := function(rs, limit)
 >    return Random(rs, SymmetricGroup(limit));
 > end;;
 
-# doc/_Chapter_Tutorial.xml:224-227
+# doc/_Chapter_Tutorial.xml:227-230
 gap> QC_Check([makePosInt, makePerm, makePerm], {r,p1,p2} -> (r^p1)^p2 = r^(p1*p2));
 true
 

@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "quickcheck",
 Subtitle := "Randomised Testing for GAP Functions",
-Version := "1.0.1",
-Date := "17/06/2025", # dd/mm/yyyy format
+Version := "1.0.2",
+Date := "10/06/2026", # dd/mm/yyyy format
 License := "MPL-2.0",
 
 Persons := [
