@@ -8,6 +8,15 @@ QC_RegisterFilterGen(IsTransformation, function(rg, limit)
     len := Random(rg, [1..limit]);
     return Transformation([1..len], x -> Random(rg, [1..len]));
     end);
+QC_RegisterFilterGen(IsPartialPerm, function(rg, limit)
+    local dom, ran;
+    dom := Set(List([1..Random(rg, [1..limit])], x -> Random(rg, [1..limit])));
+    ran := [];
+    while Size(ran) < Size(dom) do
+        AddSet(ran, Random(rg, [1..limit]));
+    od;
+    return PartialPerm(dom, Permuted(ran, Random(rg, SymmetricGroup(Size(ran)))));
+    end);
 
 QC_RegisterFilterGen(IsRat, {rg,limit} -> Random(rg, [-limit..limit])/Random(rg,[1..limit]));
 QC_RegisterFilterGen(IsPosRat, {rg,limit} -> Random(rg, [1..limit])/Random(rg,[1..limit]));

@@ -93,6 +93,7 @@ The currently allowed argument types for QuickCheck are:
 
 * IsPerm : A permutation
 * IsTransformation : A transformation
+* IsPartialPerm : A partial permutation
 * IsPermGroup : A permutation group
 
 * IsDigraph : A digraph (requires the Digraph package)
