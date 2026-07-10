@@ -2,10 +2,13 @@ name: CI
 
 # Trigger the workflow on push or pull request
 on:
-  workflow_dispatch:
-  pull_request:
   push:
+    branches:
+      - master
+      - main
+  pull_request:
 
+# the `concurrency` settings ensure that not too many CI jobs run in parallel
 concurrency:
   # group by workflow and ref; the last slightly strange component ensures that for pull
   # requests, we limit to 1 concurrent job, but for the default repository branch we don't
@@ -16,27 +19,24 @@ concurrency:
 jobs:
   # The CI test job
   test:
-    name: ${{ matrix.gap-branch }}
+    name: ${{ matrix.gap-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        gap-branch:
-          - master
-          - stable-4.16
-          - stable-4.15
-          - stable-4.14
-          - stable-4.13
+        gap-version:
+          - 'devel'   # current GAP development version from git
+          - 'latest'  # latest GAP release
+          - 'minimal' # oldest GAP release supported by this package
 
     steps:
       - uses: actions/checkout@v6
-      - uses: gap-actions/setup-gap@v2
+      - uses: gap-actions/setup-gap@v3
         with:
-          GAPBRANCH: ${{ matrix.gap-branch }}
-          GAP_PKGS_TO_CLONE: "io orb datastructures digraphs profiling"
-          GAP_PKGS_TO_BUILD: "io orb datastructures digraphs profiling"
-      - uses: gap-actions/run-pkg-tests@v3
-      - uses: gap-actions/process-coverage@v2
+          gap-version: ${{ matrix.gap-version }}
+      - uses: gap-actions/build-pkg@v3
+      - uses: gap-actions/run-pkg-tests@v4
+      - uses: gap-actions/process-coverage@v3
       - uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
