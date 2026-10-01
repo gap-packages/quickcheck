@@ -49,18 +49,20 @@ DeclareGlobalFunction("QC_Check");
 DeclareGlobalFunction("QC_CheckEqual");
 
 #! @Description
-#! Return the function called, and arguments given, last time a QuickCheck
-#! test failed.
+#! Return the function called, and arguments given, if the most recent call to
+#! `QC_Check` or `QC_CheckEqual` failed on a particular input.
 #!
 #! Returns a record containing <A>args</A> (the arguments) and a function `func`
 #! (if `QC_Check` failed) or a list of functions `funcs` (if `QC_CheckEqual` failed).
-#! Returns <K>false</K> if no test has failed.
+#! Returns <K>false</K> otherwise.
 DeclareGlobalFunction("QC_LastFailure");
 
 
 #! @Description
-#! Rerun the last test which failed. This is most useful if a test in a '.tst' file
-#! failed, as this will allow the test to enter the break loop.
+#! Rerun the last test which failed, as given by <Ref Func="QC_LastFailure"/>.
+#! This is most useful if a test in a '.tst' file failed, as this will allow the
+#! test to enter the break loop. Returns <K>fail</K> if <Ref Func="QC_LastFailure"/>
+#! returns <K>false</K>.
 DeclareGlobalFunction("QC_RerunLastFailure");
 
 #! @Description
