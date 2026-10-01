@@ -2,11 +2,15 @@ name: Docs
 
 # Trigger the workflow on push or pull request
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
       - master
   pull_request:
+
+permissions:
+  contents: read
 
 # the `concurrency` settings ensure that not too many CI jobs run in parallel
 concurrency:
