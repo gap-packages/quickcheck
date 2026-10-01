@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (quickcheck) - Chapter 3: Functionality</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3.html">[MathJax off]</a></p>
+<p><a id="X87F1120883F5B4D0" name="X87F1120883F5B4D0"></a></p>
+<div class="ChapSects"><a href="chap3_mj.html#X87F1120883F5B4D0">3 <span class="Heading">Functionality</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8606FDCE878850EF">3.1 <span class="Heading">Methods</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86F6DA2084C3973F">3.1-1 QC_MakeRandomArgument</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X867ABF1A85B7ED7A">3.1-2 QC_Check</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82E357247CEE8AE2">3.1-3 QC_CheckEqual</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82272C3079B72710">3.1-4 QC_LastFailure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7935AFDF7BBF8E47">3.1-5 QC_RerunLastFailure</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X843EF63986B24E75">3.1-6 QC_SetConfig</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B2C370E7B45F279">3.1-7 QC_GetConfig</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80CEF80E7F128232">3.1-8 QC_Skip</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7826CDAB85338254">3.1-9 QC_RegisterFilterGen</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8212C568869C6C9D">3.2 <span class="Heading">Argument descriptions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X821F3F62792C335F">3.2-1 QC_ListOf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F9ED437847BF5EC">3.2-2 QC_FixedLengthListOf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85EBEB44879E182D">3.2-3 QC_PairOf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83AC1440867D8EA1">3.2-4 QC_SetOf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X80C964DE84A78EC3">3.2-5 QC_ElementOf</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Functionality</span></h3>
+
+<p><a id="X8606FDCE878850EF" name="X8606FDCE878850EF"></a></p>
+
+<h4>3.1 <span class="Heading">Methods</span></h4>
+
+<p>This section will describe the methods of QuickCheck</p>
+
+<p><a id="X86F6DA2084C3973F" name="X86F6DA2084C3973F"></a></p>
+
+<h5>3.1-1 QC_MakeRandomArgument</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_MakeRandomArgument</code>( <var class="Arg">ObjectDescription</var>, <var class="Arg">RandomSource</var>, <var class="Arg">limit</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Create a random object as described by <var class="Arg">ObjectDescription</var> of size at most <var class="Arg">limit</var> using <var class="Arg">RandomSource</var>. How <var class="Arg">limit</var> is interpreted will vary depending on the type of object.</p>
+
+<p><a id="X867ABF1A85B7ED7A" name="X867ABF1A85B7ED7A"></a></p>
+
+<h5>3.1-2 QC_Check</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_Check</code>( <var class="Arg">arguments</var>, <var class="Arg">function</var>[, <var class="Arg">config</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Run tests on <var class="Arg">function</var> with arguments as described in <var class="Arg">arguments</var>.</p>
+
+<p><a id="X82E357247CEE8AE2" name="X82E357247CEE8AE2"></a></p>
+
+<h5>3.1-3 QC_CheckEqual</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_CheckEqual</code>( <var class="Arg">arguments</var>, <var class="Arg">functionL</var>, <var class="Arg">functionR</var>[, <var class="Arg">config</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Check that, given the same list of arguments as described in <var class="Arg">arguments</var>, functionL and function return the same value.</p>
+
+<p><a id="X82272C3079B72710" name="X82272C3079B72710"></a></p>
+
+<h5>3.1-4 QC_LastFailure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_LastFailure</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Return the function called, and arguments given, if the most recent call to <code class="code">QC_Check</code> or <code class="code">QC_CheckEqual</code> failed on a particular input.</p>
+
+<p>Returns a record containing <var class="Arg">args</var> (the arguments) and a function <code class="code">func</code> (if <code class="code">QC_Check</code> failed) or a list of functions <code class="code">funcs</code> (if <code class="code">QC_CheckEqual</code> failed). Returns <code class="keyw">false</code> otherwise.</p>
+
+<p><a id="X7935AFDF7BBF8E47" name="X7935AFDF7BBF8E47"></a></p>
+
+<h5>3.1-5 QC_RerunLastFailure</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_RerunLastFailure</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Rerun the last test which failed, as given by <code class="func">QC_LastFailure</code> (<a href="chap3_mj.html#X82272C3079B72710"><span class="RefLink">3.1-4</span></a>). This is most useful if a test in a '.tst' file failed, as this will allow the test to enter the break loop. Returns <code class="keyw">fail</code> if <code class="func">QC_LastFailure</code> (<a href="chap3_mj.html#X82272C3079B72710"><span class="RefLink">3.1-4</span></a>) returns <code class="keyw">false</code>.</p>
+
+<p><a id="X843EF63986B24E75" name="X843EF63986B24E75"></a></p>
+
+<h5>3.1-6 QC_SetConfig</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_SetConfig</code>( <var class="Arg">config</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Set config options for QuickCheck globally, by passing a record. It is not required to set all options.</p>
+
+<p>Current options are:</p>
+
+
+<ul>
+<li><p><code class="code">tests</code>: Number of tests to run (default 500)</p>
+
+</li>
+<li><p><code class="code">limit</code>: The size of the largest object to create (default 9)</p>
+
+</li>
+<li><p><code class="code">ramp</code>: Number of tests, including skipped ones, to run at each size before increasing it (default 30)</p>
+
+</li>
+<li><p><code class="code">seed</code>: Initial random seed (default 1)</p>
+
+</li>
+<li><p><code class="code">catchErrors</code>: If <code class="keyw">true</code>, an error in the tested function counts as a failure; if <code class="keyw">false</code>, it enters the break loop (default <code class="keyw">true</code>)</p>
+
+</li>
+</ul>
+<p><a id="X7B2C370E7B45F279" name="X7B2C370E7B45F279"></a></p>
+
+<h5>3.1-7 QC_GetConfig</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_GetConfig</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Get the current global configuration for QuickCheck, as a record</p>
+
+<p><a id="X80CEF80E7F128232" name="X80CEF80E7F128232"></a></p>
+
+<h5>3.1-8 QC_Skip</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_Skip</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>A function tested by <code class="func">QC_Check</code> (<a href="chap3_mj.html#X867ABF1A85B7ED7A"><span class="RefLink">3.1-2</span></a>) or <code class="func">QC_CheckEqual</code> (<a href="chap3_mj.html#X82E357247CEE8AE2"><span class="RefLink">3.1-3</span></a>) can return <code class="code">QC_Skip</code> if its arguments do not satisfy its requirements (for example, if it needs an intransitive group, or an integer which is not prime). Skipped tests do not count as failures or towards the number of tests. To avoid infinite loops, if 100 times the requested number of tests are skipped, the check stops and returns <code class="keyw">false</code>.</p>
+
+<p><a id="X7826CDAB85338254" name="X7826CDAB85338254"></a></p>
+
+<h5>3.1-9 QC_RegisterFilterGen</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_RegisterFilterGen</code>( <var class="Arg">filter</var>, <var class="Arg">gen</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Register <var class="Arg">gen</var> as a generator for arguments described by the filter <var class="Arg">filter</var>. <var class="Arg">gen</var> is called as <code class="code">gen(rs, limit)</code>, where <var class="Arg">rs</var> is a random source and <var class="Arg">limit</var> a positive integer bounding the size of the value. It is up to <var class="Arg">gen</var> to decide how to interpret <var class="Arg">limit</var>. Smaller values of <var class="Arg">limit</var> are used first, so simple inputs are tested before complex ones. Values not in <var class="Arg">filter</var> are discarded and regenerated, with an error after 100 attempts. This lets a generator serve a more specific filter, for example an abelian permutation group when only a <var class="Arg">gen</var> for permutation groups has been installed.</p>
+
+<p><a id="X8212C568869C6C9D" name="X8212C568869C6C9D"></a></p>
+
+<h4>3.2 <span class="Heading">Argument descriptions</span></h4>
+
+<p>An argument description is either a filter with a registered generator (see <code class="func">QC_RegisterFilterGen</code> (<a href="chap3_mj.html#X7826CDAB85338254"><span class="RefLink">3.1-9</span></a>)), or a function <code class="code">gen(rs, limit)</code>. The functions below build descriptions from other descriptions.</p>
+
+<p><a id="X821F3F62792C335F" name="X821F3F62792C335F"></a></p>
+
+<h5>3.2-1 QC_ListOf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_ListOf</code>( <var class="Arg">desc</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Describes a list of between 0 and <code class="code">limit</code> values described by <var class="Arg">desc</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">QC_Check([QC_ListOf(QC_PairOf(IsPosInt))],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">            l -&gt; ForAll(l, p -&gt; Length(p) = 2 and ForAll(p, IsPosInt)));</span>
+true
+</pre></div>
+
+<p><a id="X7F9ED437847BF5EC" name="X7F9ED437847BF5EC"></a></p>
+
+<h5>3.2-2 QC_FixedLengthListOf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_FixedLengthListOf</code>( <var class="Arg">desc</var>, <var class="Arg">len</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Describes a list of <var class="Arg">len</var> values described by <var class="Arg">desc</var>.</p>
+
+<p><a id="X85EBEB44879E182D" name="X85EBEB44879E182D"></a></p>
+
+<h5>3.2-3 QC_PairOf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_PairOf</code>( <var class="Arg">desc</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Describes a list of length two, whose entries are described by <var class="Arg">desc</var>.</p>
+
+<p><a id="X83AC1440867D8EA1" name="X83AC1440867D8EA1"></a></p>
+
+<h5>3.2-4 QC_SetOf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_SetOf</code>( <var class="Arg">desc</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Describes a set of between 0 and <code class="code">limit</code> values described by <var class="Arg">desc</var>.</p>
+
+<p><a id="X80C964DE84A78EC3" name="X80C964DE84A78EC3"></a></p>
+
+<h5>3.2-5 QC_ElementOf</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QC_ElementOf</code>( <var class="Arg">coll</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Describes a random element of the collection <var class="Arg">coll</var>. This ignores <code class="code">limit</code>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapInd_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="https://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>
