@@ -65,7 +65,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">= 4.13",
-  NeededOtherPackages := [ ["polycyclic", ">=1.1"] ],
+  NeededOtherPackages := [ ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := [ ],
 ),
@@ -74,7 +74,11 @@ Extensions := [
   rec(
     needed := [ ["digraphs", "1.0.0" ] ],
     filename := "gap/digraphs.g",
-  )
+  ),
+  rec(
+    needed := [ ["polycyclic", "1.1" ] ],
+    filename := "gap/polycyclic.g",
+  ),
 ],
 
 AvailabilityTest := ReturnTrue,
