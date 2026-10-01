@@ -17,7 +17,12 @@ on:
         required: false
         default: false
 
-permissions: write-all
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:

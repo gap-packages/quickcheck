@@ -2,11 +2,15 @@ name: CI
 
 # Trigger the workflow on push or pull request
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
       - main
   pull_request:
+
+permissions:
+  contents: read
 
 # the `concurrency` settings ensure that not too many CI jobs run in parallel
 concurrency:
@@ -36,6 +40,10 @@ jobs:
           gap-version: ${{ matrix.gap-version }}
       - uses: gap-actions/build-pkg@v3
       - uses: gap-actions/run-pkg-tests@v4
+      - uses: gap-actions/run-pkg-tests@v4
+        with:
+          mode: onlyneeded
+          coverage: false
       - uses: gap-actions/process-coverage@v3
       - uses: codecov/codecov-action@v6
         with:
