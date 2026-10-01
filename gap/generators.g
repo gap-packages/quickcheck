@@ -40,25 +40,25 @@ end);
 
 
 
-QC_ListOf := function(object)
+InstallGlobalFunction(QC_ListOf, function(object)
     return function(rg, limit)
-        return List([1..Random([0..limit])], {x} -> QC_MakeRandomArgument(object, rg, limit));
+        return List([1..Random(rg, [0..limit])], {x} -> QC_MakeRandomArgument(object, rg, limit));
     end;
-end;
+end);
 
-QC_FixedLengthListOf := function(object, length)
+InstallGlobalFunction(QC_FixedLengthListOf, function(object, length)
     return function(rg, limit)
         return List([1..length], {x} -> QC_MakeRandomArgument(object, rg, limit));
     end;
-end;
+end);
 
-QC_PairOf := {o} -> QC_FixedLengthListOf(o, 2);
+InstallGlobalFunction(QC_PairOf, {o} -> QC_FixedLengthListOf(o, 2));
 
 
-QC_SetOf := function(object)
+InstallGlobalFunction(QC_SetOf, function(object)
     return function(rg, limit)
         local set, targetsize, testlimit;
-        targetsize := Random([0..limit]);
+        targetsize := Random(rg, [0..limit]);
         set := [];
         # In case we have trouble filling the set, put a limit on number of tests
         testlimit := targetsize * limit + 10;
@@ -68,13 +68,13 @@ QC_SetOf := function(object)
         od;
         return set;
     end;
-end;
+end);
 
-QC_ElementOf := function(object)
+InstallGlobalFunction(QC_ElementOf, function(object)
     return function(rg, limit)
         return Random(rg, object);
     end;
-end;
+end);
 
 
 QC_RegisterFilterGen(IsCyclic, {rg, limit} -> CyclicGroup(Random(rg, [1..limit])));

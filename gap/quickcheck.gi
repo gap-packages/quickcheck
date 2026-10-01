@@ -4,14 +4,16 @@
 # Implementations
 #
 
-QC_Skip := "SKIP TEST";
+# A unique object, compared with IsIdenticalObj
+BindGlobal("QC_Skip", Objectify(NewType(NewFamily("QCSkipFamily"), IsQCSkip and IsPositionalObjectRep), []));
+InstallMethod(PrintObj, [IsQCSkip], function(x) Print("QC_Skip"); end);
 
 # Store the generators we support
 DeclareOperation("QC_Filters", [IsObject]);
 
-QC_RegisterFilterGen := function(filt, func)
+InstallGlobalFunction(QC_RegisterFilterGen, function(filt, func)
     InstallMethod(QC_Filters, [filt], function(x) return func; end);
-end;
+end);
 
 
 InstallGlobalFunction(QC_MakeRandomArgument,
@@ -73,12 +75,13 @@ InstallGlobalFunction(QC_SetConfig,
 
 InstallGlobalFunction(QC_GetConfig, {} -> ShallowCopy(_QC.defaultConfig));
 
-_QC.LastFailure := rec();
+_QC.LastFailure := false;
 
 _QC.Check := function(argtypes, func, configarg...)
         local testCount, skipCount, args, rg, call, ret, config, testSize, breakOnError, instream;
 
         config := _QC.fillConfig(configarg);
+        Unbind(_QC.Counterexample);
 
         rg := RandomSource(IsMersenneTwister, config.seed);
 
@@ -114,22 +117,23 @@ _QC.Check := function(argtypes, func, configarg...)
             fi;
             CloseStream(instream);
             Unbind(_QC.Ret);
-            # We leave _QC.Args and _QC.Function, so they can be returned by QC_LastFailure
 
             if IsEmpty(ret) then
                 PrintFormatted("Test {} of {} did not return a value\n", testCount, config.tests);
                 Print(" Input: ", args, "\n");
+                _QC.Counterexample := args;
                 return false;
             fi;
 
             ret := ret[1];
 
-            if ret = QC_Skip then
+            if IsIdenticalObj(ret, QC_Skip) then
                 skipCount := skipCount + 1;
             elif ret <> true then
                 PrintFormatted("Test {} of {} failed:\n", testCount, config.tests);
                 Print(" Input: ", args,"\n");
                 Print(" Output: ", ret,"\n");
+                _QC.Counterexample := args;
                 return false;
             else
                 testCount := testCount + 1;
@@ -145,12 +149,12 @@ end;
 
 InstallGlobalFunction(QC_Check,
     function(argtypes, func, configarg...)
-        local ret, savefailure;
-        savefailure := _QC.LastFailure;
-        _QC.LastFailure := rec(func := func);
+        local ret;
+        _QC.LastFailure := false;
         ret := CallFuncList(_QC.Check, Concatenation([argtypes, func], configarg));
-        if ret then
-            _QC.LastFailure := savefailure;
+        if IsBound(_QC.Counterexample) then
+            _QC.LastFailure := rec(func := func, args := _QC.Counterexample);
+            _QC.LastFailureRerun := func;
         fi;
         return ret;
 end);
@@ -158,21 +162,19 @@ end);
 
 InstallGlobalFunction(QC_CheckEqual,
     function(argtypes, funcL, funcR, configarg...)
-        local funccheck, ret, savefailure;
-
-        savefailure := _QC.LastFailure;
-        _QC.LastFailure := rec(funcs := [funcL, funcR]);
+        local funccheck, ret;
 
         funccheck := function(args...)
             local retL, retR;
             retL := CallFuncListWrap(funcL, StructuralCopy(args));
             retR := CallFuncListWrap(funcR, args);
-            if retL = [QC_Skip] or retL = [QC_Skip] then
+            if (not IsEmpty(retL) and IsIdenticalObj(retL[1], QC_Skip)) or
+               (not IsEmpty(retR) and IsIdenticalObj(retR[1], QC_Skip)) then
                 return QC_Skip;
             fi;
 
             if IsEmpty(retL) or IsEmpty(retR) then
-                return "A least one function did no return a value";
+                return "At least one function did not return a value";
             fi;
 
             retL := retL[1];
@@ -183,27 +185,22 @@ InstallGlobalFunction(QC_CheckEqual,
             fi;
             return StringFormatted("Return values differ: {} and {}", retL, retR);
         end;
+        _QC.LastFailure := false;
         ret := CallFuncList(_QC.Check, Concatenation([argtypes, funccheck], configarg));
-        if ret then
-            _QC.LastFailure := savefailure;
+        if IsBound(_QC.Counterexample) then
+            _QC.LastFailure := rec(funcs := [funcL, funcR], args := _QC.Counterexample);
+            _QC.LastFailureRerun := funccheck;
         fi;
         return ret;
 end);
 
 InstallGlobalFunction(QC_LastFailure,
-    function()
-    if IsBound(_QC.Args) then
-        return rec(func := _QC.Function, args := _QC.Args);
-    else
-        return fail;
-    fi;
-end);
+    {} -> _QC.LastFailure);
 
 InstallGlobalFunction(QC_RerunLastFailure,
     function()
-    if IsBound(_QC.Args) then
-        return CallFuncList(_QC.Function, _QC.Args);
-    else
+    if _QC.LastFailure = false then
         return fail;
     fi;
+    return CallFuncList(_QC.LastFailureRerun, StructuralCopy(_QC.LastFailure.args));
 end);

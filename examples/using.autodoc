@@ -75,7 +75,7 @@ true
 @EndExampleSession
 
 
-In some cases we might want to return an explanation of why a test failed. Rather than returning `false` from `QC_Equal`, you can instead return a string. Returning a string is treated as a failure, and the string is printed out to the user.
+In some cases we might want to return an explanation of why a test failed. Rather than returning `false` from a function tested by `QC_Check`, you can instead return a string. Returning a string is treated as a failure, and the string is printed out to the user.
 
 @Section Valid argument types for QuickCheck
 
