@@ -1,3 +1,4 @@
+#@if TestPackageAvailability("digraphs") <> fail
 gap> LoadPackage("digraphs", false);
 true
 gap> LoadPackage("quickcheck", false);
@@ -14,3 +15,4 @@ gap> Reset(GlobalMersenneTwister, 77);; Random([1..10]);;
 gap> rs := RandomSource(IsMersenneTwister, 3);;
 gap> l = List([1..20], i -> QC_MakeRandomArgument(IsDigraph, rs, 9));
 true
+#@fi
