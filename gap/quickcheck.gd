@@ -83,5 +83,13 @@ DeclareGlobalFunction("QC_SetConfig");
 DeclareGlobalFunction("QC_GetConfig");
 
 
+BindGlobal("QC_Skip", Immutable("SKIP TEST"));
+DeclareGlobalFunction("QC_RegisterFilterGen");
+DeclareGlobalFunction("QC_ListOf");
+DeclareGlobalFunction("QC_FixedLengthListOf");
+DeclareGlobalFunction("QC_PairOf");
+DeclareGlobalFunction("QC_SetOf");
+DeclareGlobalFunction("QC_ElementOf");
+
 ## For private data
 BindGlobal("_QC", rec());

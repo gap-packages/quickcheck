@@ -4,14 +4,12 @@
 # Implementations
 #
 
-QC_Skip := "SKIP TEST";
-
 # Store the generators we support
 DeclareOperation("QC_Filters", [IsObject]);
 
-QC_RegisterFilterGen := function(filt, func)
+InstallGlobalFunction(QC_RegisterFilterGen, function(filt, func)
     InstallMethod(QC_Filters, [filt], function(x) return func; end);
-end;
+end);
 
 
 InstallGlobalFunction(QC_MakeRandomArgument,
