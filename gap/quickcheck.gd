@@ -83,14 +83,66 @@ DeclareGlobalFunction("QC_SetConfig");
 DeclareGlobalFunction("QC_GetConfig");
 
 
-# A unique object, compared with IsIdenticalObj
 DeclareCategory("IsQCSkip", IsObject);
-BindGlobal("QC_Skip", Objectify(NewType(NewFamily("QCSkipFamily"), IsQCSkip and IsPositionalObjectRep), []));
+
+#! @Description
+#! A function tested by <Ref Func="QC_Check"/> or <Ref Func="QC_CheckEqual"/>
+#! can return <C>QC_Skip</C> if its arguments do not satisfy its requirements
+#! (for example, if it needs an intransitive group, or an integer which is not prime).
+#! Skipped tests do not count as failures or towards the number of tests.
+#! To avoid infinite loops, if 100 times the requested number of tests
+#! are skipped, the check stops and returns <K>false</K>.
+DeclareGlobalName("QC_Skip");
+
+#! @Description
+#! Register <A>gen</A> as a generator for arguments described by the filter
+#! <A>filter</A>. <A>gen</A> is called as <C>gen(rs, limit)</C>, where <A>rs</A> is a
+#! random source and <A>limit</A> a positive integer bounding the size of the value.
+#! It is up to <A>gen</A> to decide how to interpret <A>limit</A>.
+#! Smaller values of <A>limit</A> are used first, so simple inputs are tested
+#! before complex ones.
+#! Values not in <A>filter</A> are discarded and regenerated, with an error
+#! after 100 attempts. This lets a generator serve a more specific filter, for
+#! example an abelian permutation group when only a <A>gen</A> for permutation
+#! groups has been installed.
+#! @Arguments filter, gen
 DeclareGlobalFunction("QC_RegisterFilterGen");
+
+#! @Section Argument descriptions
+#!
+#! An argument description is either a filter with a registered generator
+#! (see <Ref Func="QC_RegisterFilterGen"/>), or a function <C>gen(rs, limit)</C>.
+#! The functions below build descriptions from other descriptions.
+
+#! @Description
+#! Describes a list of between 0 and <C>limit</C> values described by <A>desc</A>.
+#! @Arguments desc
+#! @BeginExampleSession
+#! gap> QC_Check([QC_ListOf(QC_PairOf(IsPosInt))],
+#! >             l -> ForAll(l, p -> Length(p) = 2 and ForAll(p, IsPosInt)));
+#! true
+#! @EndExampleSession
 DeclareGlobalFunction("QC_ListOf");
+
+#! @Description
+#! Describes a list of <A>len</A> values described by <A>desc</A>.
+#! @Arguments desc, len
 DeclareGlobalFunction("QC_FixedLengthListOf");
+
+#! @Description
+#! Describes a list of length two, whose entries are described by <A>desc</A>.
+#! @Arguments desc
 DeclareGlobalFunction("QC_PairOf");
+
+#! @Description
+#! Describes a set of between 0 and <C>limit</C> values described by <A>desc</A>.
+#! @Arguments desc
 DeclareGlobalFunction("QC_SetOf");
+
+#! @Description
+#! Describes a random element of the collection <A>coll</A>. This ignores
+#! <C>limit</C>.
+#! @Arguments coll
 DeclareGlobalFunction("QC_ElementOf");
 
 ## For private data

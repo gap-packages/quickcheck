@@ -4,6 +4,8 @@
 # Implementations
 #
 
+# A unique object, compared with IsIdenticalObj
+BindGlobal("QC_Skip", Objectify(NewType(NewFamily("QCSkipFamily"), IsQCSkip and IsPositionalObjectRep), []));
 InstallMethod(PrintObj, [IsQCSkip], function(x) Print("QC_Skip"); end);
 
 # Store the generators we support

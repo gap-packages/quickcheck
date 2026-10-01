@@ -17,25 +17,25 @@ gap> testFunc := function(a,b)
 gap> QC_Check([IsInt, IsInt], testFunc);
 true
 
-# doc/_Chapter_Tutorial.xml:30-36
+# doc/_Chapter_Tutorial.xml:29-35
 gap> QC_Check([IsPerm, IsPerm], testFunc);
 Test 60 of 500 failed:
  Input: [ (1,3), (1,3,2) ]
  Output: false
 false
 
-# doc/_Chapter_Tutorial.xml:44-47
+# doc/_Chapter_Tutorial.xml:42-45
 gap> QC_LastFailure();
 rec( args := [ (1,3), (1,3,2) ], func := function( a, b ) ... end )
 
-# doc/_Chapter_Tutorial.xml:53-59
+# doc/_Chapter_Tutorial.xml:50-56
 gap> slowIntersection := function(g,h)
 >      return Group(Filtered(g, p -> p in h));
 > end;;
 gap> QC_CheckEqual([IsPermGroup, IsPermGroup], Intersection, slowIntersection);
 true
 
-# doc/_Chapter_Tutorial.xml:82-92
+# doc/_Chapter_Tutorial.xml:77-87
 gap> checkDiv := function(a,b)
 >     if b = 0 then return QC_Skip; fi;
 >     return b*(a/b);
@@ -46,7 +46,7 @@ gap> justA := function(a,b)
 gap> QC_CheckEqual([IsInt, IsInt], checkDiv, justA);
 true
 
-# doc/_Chapter_Tutorial.xml:183-197
+# doc/_Chapter_Tutorial.xml:176-190
 gap> func := function(x)
 >     local a, s;
 >     if x < 2 then
@@ -61,7 +61,7 @@ gap> func := function(x)
 gap> QC_Check([IsInt], func);
 true
 
-# doc/_Chapter_Tutorial.xml:214-221
+# doc/_Chapter_Tutorial.xml:205-212
 gap> makePosInt := function(rs, limit)
 >    return Random(rs, [1..limit]);
 > end;;
@@ -69,7 +69,7 @@ gap> makePerm := function(rs, limit)
 >    return Random(rs, SymmetricGroup(limit));
 > end;;
 
-# doc/_Chapter_Tutorial.xml:227-230
+# doc/_Chapter_Tutorial.xml:217-220
 gap> QC_Check([makePosInt, makePerm, makePerm], {r,p1,p2} -> (r^p1)^p2 = r^(p1*p2));
 true
 
