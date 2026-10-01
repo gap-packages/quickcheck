@@ -6,6 +6,13 @@ gap> QC_CheckEqual([IsInt], skipZero, x -> x);
 true
 gap> QC_CheckEqual([IsInt], x -> x, skipZero);
 true
+gap> QC_Check([IsInt], x -> "SKIP TEST", rec(tests := 5));
+Test 0 of 5 failed:
+ Input: [ 0 ]
+ Output: SKIP TEST
+false
+gap> QC_Skip;
+QC_Skip
 gap> QC_CheckEqual([IsInt], x -> 1, function(x) end, rec(tests := 5));
 Test 0 of 5 failed:
  Input: [ 0 ]

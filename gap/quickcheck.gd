@@ -83,7 +83,9 @@ DeclareGlobalFunction("QC_SetConfig");
 DeclareGlobalFunction("QC_GetConfig");
 
 
-BindGlobal("QC_Skip", Immutable("SKIP TEST"));
+# A unique object, compared with IsIdenticalObj
+DeclareCategory("IsQCSkip", IsObject);
+BindGlobal("QC_Skip", Objectify(NewType(NewFamily("QCSkipFamily"), IsQCSkip and IsPositionalObjectRep), []));
 DeclareGlobalFunction("QC_RegisterFilterGen");
 DeclareGlobalFunction("QC_ListOf");
 DeclareGlobalFunction("QC_FixedLengthListOf");

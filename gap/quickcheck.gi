@@ -4,6 +4,8 @@
 # Implementations
 #
 
+InstallMethod(PrintObj, [IsQCSkip], function(x) Print("QC_Skip"); end);
+
 # Store the generators we support
 DeclareOperation("QC_Filters", [IsObject]);
 
@@ -123,7 +125,7 @@ _QC.Check := function(argtypes, func, configarg...)
 
             ret := ret[1];
 
-            if ret = QC_Skip then
+            if IsIdenticalObj(ret, QC_Skip) then
                 skipCount := skipCount + 1;
             elif ret <> true then
                 PrintFormatted("Test {} of {} failed:\n", testCount, config.tests);
@@ -164,7 +166,8 @@ InstallGlobalFunction(QC_CheckEqual,
             local retL, retR;
             retL := CallFuncListWrap(funcL, StructuralCopy(args));
             retR := CallFuncListWrap(funcR, args);
-            if retL = [QC_Skip] or retR = [QC_Skip] then
+            if (not IsEmpty(retL) and IsIdenticalObj(retL[1], QC_Skip)) or
+               (not IsEmpty(retR) and IsIdenticalObj(retR[1], QC_Skip)) then
                 return QC_Skip;
             fi;
 
