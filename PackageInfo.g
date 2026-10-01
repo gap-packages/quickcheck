@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "quickcheck",
 Subtitle := "Randomised Testing for GAP Functions",
-Version := "1.0.2",
-Date := "10/06/2026", # dd/mm/yyyy format
+Version := "1.1.0",
+Date := "01/10/2026", # dd/mm/yyyy format
 License := "MPL-2.0",
 
 Persons := [
@@ -52,7 +52,13 @@ ArchiveFormats := ".tar.gz",
 ##
 Status := "dev",
 
-AbstractHTML   :=  "",
+AbstractHTML   :=  Concatenation(
+  "The <span class=\"pkgname\">QuickCheck</span> package provides ",
+  "property-based testing for GAP. It lets users easily test that a ",
+  "function always passes (or two functions return the same value) on ",
+  "many randomly generated inputs. The package can generate many types ",
+  "of GAP objects. Small inputs are tried first, so the first ",
+  "counterexample found is usually small."),
 
 PackageDoc := rec(
   BookName  := "quickcheck",
@@ -85,7 +91,7 @@ AvailabilityTest := ReturnTrue,
 
 TestFile := "tst/testall.g",
 
-#Keywords := [ "TODO" ],
+Keywords := [ "testing", "property-based testing", "randomised testing", "QuickCheck" ],
 
 ));
 

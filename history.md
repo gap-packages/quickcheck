@@ -1,3 +1,9 @@
+v1.1.0
+======
+
+* Significant documentation improvements
+* Many small fixes
+
 v1.0.2
 ======
 
