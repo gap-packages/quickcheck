@@ -12,5 +12,15 @@ Test 0 of 5 failed:
  Output: At least one function did not return a value
 false
 
+# Generators only use the given random source
+gap> rs := RandomSource(IsMersenneTwister, 3);;
+gap> a := QC_ListOf(IsInt)(rs, 9);; b := QC_SetOf(IsInt)(rs, 9);;
+gap> Reset(GlobalMersenneTwister, 77);; Random([1..10]);;
+gap> rs := RandomSource(IsMersenneTwister, 3);;
+gap> a = QC_ListOf(IsInt)(rs, 9);
+true
+gap> b = QC_SetOf(IsInt)(rs, 9);
+true
+
 #
 gap> STOP_TEST("failures.tst", 1);
