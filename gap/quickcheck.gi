@@ -167,7 +167,7 @@ InstallGlobalFunction(QC_CheckEqual,
             local retL, retR;
             retL := CallFuncListWrap(funcL, StructuralCopy(args));
             retR := CallFuncListWrap(funcR, args);
-            if retL = [QC_Skip] or retL = [QC_Skip] then
+            if retL = [QC_Skip] or retR = [QC_Skip] then
                 return QC_Skip;
             fi;
 
