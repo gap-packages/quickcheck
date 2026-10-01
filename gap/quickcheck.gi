@@ -172,7 +172,7 @@ InstallGlobalFunction(QC_CheckEqual,
             fi;
 
             if IsEmpty(retL) or IsEmpty(retR) then
-                return "A least one function did no return a value";
+                return "At least one function did not return a value";
             fi;
 
             retL := retL[1];
