@@ -55,6 +55,7 @@ DeclareGlobalFunction("QC_CheckEqual");
 #! Returns a record containing <A>args</A> (the arguments) and a function `func`
 #! (if `QC_Check` failed) or a list of functions `funcs` (if `QC_CheckEqual` failed).
 #! Returns <K>false</K> otherwise.
+#! @Arguments
 DeclareGlobalFunction("QC_LastFailure");
 
 
@@ -63,6 +64,7 @@ DeclareGlobalFunction("QC_LastFailure");
 #! This is most useful if a test in a '.tst' file failed, as this will allow the
 #! test to enter the break loop. Returns <K>fail</K> if <Ref Func="QC_LastFailure"/>
 #! returns <K>false</K>.
+#! @Arguments
 DeclareGlobalFunction("QC_RerunLastFailure");
 
 #! @Description
@@ -70,9 +72,13 @@ DeclareGlobalFunction("QC_RerunLastFailure");
 #! to set all options.
 #!
 #! Current options are:
-#!  * <C>tests</C>: Number of tests to run
-#!  * <C>limit</C>: The size of the largest object to create
-#!  * <C>seed</C>: Initial random seed
+#!  * <C>tests</C>: Number of tests to run (default 500)
+#!  * <C>limit</C>: The size of the largest object to create (default 9)
+#!  * <C>ramp</C>: Number of tests, including skipped ones, to run at each size
+#!    before increasing it (default 30)
+#!  * <C>seed</C>: Initial random seed (default 1)
+#!  * <C>catchErrors</C>: If <K>true</K>, an error in the tested function counts
+#!    as a failure; if <K>false</K>, it enters the break loop (default <K>true</K>)
 #!
 #! @Arguments config
 DeclareGlobalFunction("QC_SetConfig");
@@ -80,6 +86,7 @@ DeclareGlobalFunction("QC_SetConfig");
 
 #! @Description
 #! Get the current global configuration for QuickCheck, as a record
+#! @Arguments
 DeclareGlobalFunction("QC_GetConfig");
 
 

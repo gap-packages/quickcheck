@@ -10,7 +10,7 @@
 #
 gap> START_TEST("quickcheck02.tst");
 
-# doc/_Chapter_Functionality.xml:131-135
+# doc/_Chapter_Functionality.xml:139-143
 gap> QC_Check([QC_ListOf(QC_PairOf(IsPosInt))],
 >             l -> ForAll(l, p -> Length(p) = 2 and ForAll(p, IsPosInt)));
 true
